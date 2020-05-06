@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($window) {
+  var c = this;
+    c.data.uname=uname;
+    c.uiAction = function(action) {
+            //$window.open(c.data.win);
+      setTimeout($window.open(c.data.win),50000);
+            c.data.action = action;
+        c.server.update().then(function() {
+            c.data.action = undefined;
+                   
+               
+        })
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>form {
+  border: 3px solid #ffffff;
+  display: flex;
+}
+
+ 
+
+hr{
+  border-top: 1px solid black;
+}
+
+ 
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+ 
+
+ 
+
+ 
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+ 
+
+ 
+
+ 
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+ 
+
+ 
+
+ 
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+ 
+
+ 
+
+ 
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+ 
+
+ 
+
+ 
+
+/* Avatar image */
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+ 
+
+ 
+
+ 
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+ 
+
+ 
+
+ 
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+ 
+
+ 
+
+ 
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>test_manish</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>test manish</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function(input) {
+    var action = input.action;
+    var username=input.myInputModel;
+      var fname=input.fname;
+      var lname=input.lname;
+      var phoneno=input.phoneno;
+      var email=input.email;
+      var password=input.password;
+      //var cpassword=input.password;
+  if (action == 'resolve') {
+       
+            var gr=new GlideRecord('sys_user');
+                gr.username=username;
+                gr.first_name=fname;
+                gr.last_name=lname;
+                gr.mobile_phone=phoneno;
+                gr.email=email;
+                gr.u_pass_store=password;
+                //gr.u_pass_stor_comp=password;
+                gr.insert();
+       
+       
+gr.addQuery('email',email);
+gr.query();
+       
+if(gr.next()){
+    //gs.addInfoMessage("cannot proceed");
+    data.win='https://dev85263.service-now.com/notes';
+    return false;
+}   
+       
+            }
+   
+   
+    //if(action == 'resolve'){
+       
+        //var record = new GlideRecord('sys_user');
+        //record.addEncodedQuery('u_pass_storeSAMEASu_pass_stor_comp');
+      //gs.addInfoMessage("The password are same")   
+    //}else{
+       
+        //gs.addErrorMessage("Passwords are not same");
+       
+    //}
+   
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-06 10:47:15</sys_created_on>
+        <sys_id>314ea66adbec101003ec6f774896192c</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>test manish</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_314ea66adbec101003ec6f774896192c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-06 10:58:50</sys_updated_on>
+        <template><![CDATA[<div>
+<form>
+  <!--<div class="imgcontainer">
+    <img src="https://employeebenefits.com/images/login_icon_small.png" alt="Avatar" class="avatar">
+  </div>-->
+
+ 
+
+  <div class="container">
+    <h3>Registration</h3>
+    <hr>
+    <!--username field-->
+    <label id="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required ng-model="c.data.myInputModel">
+
+ 
+
+     <!--First name field-->
+    <label id="fname"><b>First Name</b></label>
+    <input type="text" placeholder="Enter First Name" name="fname" required ng-model="c.data.fname">
+    
+    <!--Last name field-->
+    <label id="lname"><b>Last Name</b></label>
+    <input type="text" placeholder="Enter Last Name" name="lname" required ng-model="c.data.lname">
+    
+    <!--Phone field-->
+    <label id="phone"><b>Phone no</b></label>
+    <input type="text" placeholder="Enter Phone no" name="phone" required ng-model="c.data.phoneno">
+
+ 
+
+    <!--Email field-->
+    <label id="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required ng-model="c.data.email">
+    
+    <!--password field-->
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required ng-model="c.data.password" required>
+
+ 
+
+    <!--confirm password field-->
+    <!--<label for="cpsw"><b>Confirm Password</b></label>
+    <input type="password" placeholder="Re-confirm Password" name="cpsw" required ng-model="" required>
+    -->
+    <button type="button" class="btn btn-primary btn-block" ng-click="c.uiAction('resolve')">Register</button>
+  </div>
+</form>
+  <br>
+</div>]]></template>
+    </sp_widget>
+</record_update>
